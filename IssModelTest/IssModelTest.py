@@ -1,6 +1,6 @@
 import unittest
 
-from src.main.IssModel.IssModel import IssModel
+from IssModel.IssModel import IssModel
 
 
 class IssModelTest(unittest.TestCase):
