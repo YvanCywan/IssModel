@@ -33,9 +33,10 @@ jobs:
         run: |-
           pytest */*.py -v || exit 1
 
-      - name: Automatic Revert
-        if: failure()
-        uses: tofu-apis/revert-commit-action@v0.0.37
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          is-push-enabled: 'true'
+      - name: Revert Commit on Test Failure
+        if: ${{ failure() }}
+        run: |-
+          git revert HEAD --no-edit
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
