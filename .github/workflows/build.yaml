@@ -37,6 +37,7 @@ jobs:
         if: ${{ failure() }}
         run: |-
           commit_range=$(git log --pretty=format:'%H' -n 2)
+          git stash push -m "Stashing local changes before revert"
           git revert $commit_range --no-edit
           git push origin main
         env:
