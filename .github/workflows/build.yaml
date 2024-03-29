@@ -8,23 +8,22 @@ on:
       - main
 
 jobs:
-  name: Testing Pipeline
-  runs-on: ubuntu-latest
-  steps:
-    - name: Checkout Code
-      uses: actions/checkout@v2
+  testing:
+    name: Testing Pipeline
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
 
-    - name: Set Up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.11
+      - name: Set Up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.11
 
-    - name: Install Dependencies
-      run: |-
-        pip .
+      - name: Install Dependencies
+        run: |-
+          pip .
 
-    - name: Run Tests
-      run: |-
-        pytest -v IssModelTest/*.py -v
-        
-    
+      - name: Run Tests
+        run: |-
+          pytest -v IssModelTest/*.py -v
