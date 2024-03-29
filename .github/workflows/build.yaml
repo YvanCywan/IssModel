@@ -26,18 +26,10 @@ jobs:
 
       - name: Run Tests
         run: |-
-          pytest */*.py -v
+          pytest */*.py -v | exit 1
 
-      - name: Check test status
+      - name: Revert Commit on Test Failure
+        if: failure()
         run: |-
-          # Check the status of the most recent commit
-          COMMIT_SHA=$(git rev-parse HEAD)
-          TEST_STATUS=$(curl -s https://api.github.com/repos/$GITHUB_REPOSITORY/commits/$COMMIT_SHA/status | jq -r '.state')
-          
-          # If the test status is failure, revert the commit
-          if [ "$TEST_STATUS" = "failure" ]; then
-            git revert --no-edit $COMMIT_SHA
-            git push origin main
-          fi
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          git revert HEAD --no-edit
+          git push origin main
