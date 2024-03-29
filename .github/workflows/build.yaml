@@ -26,7 +26,7 @@ jobs:
 
       - name: Run Tests
         run: |-
-          pytest -v IssModelTest/*.py -v
+          pytest */*.py -v
 
       - name: Check test status
         run: |-
