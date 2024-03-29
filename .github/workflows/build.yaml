@@ -31,10 +31,10 @@ jobs:
 
       - name: Run Tests
         run: |-
-          pytest */*.py -v | exit 1
+          pytest */*.py -v || exit 1
 
       - name: Revert Commit on Test Failure
-        if: failure()
+        if: ${{ failure() }}
         run: |-
           git revert HEAD --no-edit
           git push origin main
