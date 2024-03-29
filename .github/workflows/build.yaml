@@ -36,7 +36,6 @@ jobs:
       - name: Revert Commit on Test Failure
         if: ${{ failure() }}
         run: |-
-          commit_range=$(git log --pretty=format:'%H' --grep="^\\[CI\\]" -n 1)
           git stash push -m "Stashing local changes before revert"
           git revert HEAD^ --no-edit
           git push origin main
