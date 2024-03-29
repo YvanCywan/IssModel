@@ -36,7 +36,8 @@ jobs:
       - name: Revert Commit on Test Failure
         if: ${{ failure() }}
         run: |-
-          git revert HEAD --no-edit
+          commit_range=$(git log --pretty=format:'%H' -n 2)
+          git revert $commit_range --no-edit
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
