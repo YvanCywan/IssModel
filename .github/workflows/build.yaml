@@ -1,0 +1,44 @@
+name: Testing Pipeline
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  testing:
+    name: Testing Pipeline
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Git
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+
+      - name: Set Up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.11
+
+      - name: Install Dependencies
+        run: |-
+          pip install .
+
+      - name: Run Tests
+        run: |-
+          pytest */*.py -v || exit 1
+
+      - name: Revert Commit on Test Failure
+        if: ${{ failure() }}
+        run: |-
+          commit_range=$(git log --pretty=format:'%H' -n 2)
+          git stash push -m "Stashing local changes before revert"
+          git revert $commit_range --no-edit
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
