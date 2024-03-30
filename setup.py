@@ -11,9 +11,10 @@ setup(
         "pip",
         "setuptools",
         "scipy",
+        "matplotlib",
+        "behave"
     ],
     author='Yvan Cywan',
     description='A non working model of the ISS',
     license='MIT'
 )
-
