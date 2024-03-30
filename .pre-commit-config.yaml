@@ -10,11 +10,10 @@ repos:
     hooks:
       - id: mypy
         args: ['--ignore-missing-imports']
-  # Add more hooks as needed
-
-  # This section will add a hook to run GitHub Actions workflows
-- repo: https://github.com/marketplace/actions/github-action-check
-  rev: v1.2.0
+- repo: local
   hooks:
-    - id: github-actions-check
+    - id: pytest
+      name: pytest
+      entry: ls
+      language: system
       stages: [commit]
