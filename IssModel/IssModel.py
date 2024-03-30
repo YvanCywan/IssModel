@@ -1,7 +1,7 @@
 class IssModel:
-    mass = 1000
-    radius = 1000
-    height = 1000
+    mass: float = 1000
+    radius: float = 1000
+    height: float = 1000
 
     def get_mass(self) -> float:
         return self.mass
