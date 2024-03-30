@@ -1,3 +1,3 @@
 # Basic Object Design
 
-![Object Design](images/issModel.png)
+![Object Design](images/IssModel.png)
