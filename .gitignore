@@ -4,7 +4,6 @@
 .idea
 .idea/*
 .idea/**/*
-.idia/workspace.xml
 .pytest_cache
 .pytest_cache/*
 .pytest_cache/**/*
