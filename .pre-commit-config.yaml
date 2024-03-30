@@ -14,6 +14,6 @@ repos:
   hooks:
     - id: pytest
       name: pytest
-      entry: ls
+      entry: pytest ./*/*.py
       language: system
       stages: [commit]
