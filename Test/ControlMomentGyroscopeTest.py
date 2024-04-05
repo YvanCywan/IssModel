@@ -19,3 +19,9 @@ class ControlMomentGyroscopeTest(unittest.TestCase):
         angular_velocity: list[float] = testCmg.calculate_angular_velocity([100, 100, 100], [1000, 3000, 1000])
         expected_velocity = [173.20508076, 519.61524227, 173.20508076]
         self.assertEqual(all(angular_velocity), all(expected_velocity))
+
+    def test_calculate_axis(self):
+        testCmg = ControlMomentGyroscope(max_momentum=1000, max_speed=1000)
+        axis = testCmg.calculate_axis([100, 100, 100], [1000, 3000, 1000])
+        expected_axis = np.array([0.0, 0.0, 1.0])
+        self.assertEqual(any(axis), any(expected_axis))

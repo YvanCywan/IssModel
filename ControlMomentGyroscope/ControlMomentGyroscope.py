@@ -42,8 +42,8 @@ class ControlMomentGyroscope:
     def calculate_angular_velocity(self, torque: list, axis: list) -> list[float]:
         return np.linalg.norm(torque) / self.max_momentum * np.array(axis)
 
-    def calculate_axis(self, torque: list, angular_velocity: float) -> float:
-        return np.linalg.norm(torque) / self.max_momentum * angular_velocity
+    def calculate_axis(self, torque: list[float], angular_velocity: list[float]) -> np.array:
+        return np.linalg.norm(torque) / self.max_momentum * np.array(angular_velocity)
 
     def calculate_coordinates(self, torque: list, angular_velocity: float, axis: list) -> np.array:
         return np.array(self.coordinates) + self.calculate_angular_velocity(torque, axis) * self.calculate_axis(torque, angular_velocity)
