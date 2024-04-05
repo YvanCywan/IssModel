@@ -25,3 +25,10 @@ class ControlMomentGyroscopeTest(unittest.TestCase):
         axis = testCmg.calculate_axis([100, 100, 100], [1000, 3000, 1000])
         expected_axis = np.array([0.0, 0.0, 1.0])
         self.assertEqual(any(axis), any(expected_axis))
+
+    def test_calculate_coordinates(self):
+        testCmg = ControlMomentGyroscope(max_momentum=1000, max_speed=1000)
+        testCmg.set_coordinates([1000, 3000, 1000])
+        coordinates = testCmg.calculate_coordinates([100, 100, 100], [1000, 3000, 1000], [1000, 3000, 1000])
+        expected_coordinates: np.array = np.array([1000.0, 3000.0, 1000.0])
+        self.assertEqual(any(coordinates), any(expected_coordinates))

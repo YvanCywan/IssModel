@@ -6,7 +6,7 @@ import numpy as np
 class ControlMomentGyroscope:
     max_momentum: float
     max_speed: float
-    coordinates: list
+    coordinates: list[float]
 
     def __init__(self, max_momentum: float, max_speed: float):
         self.max_speed = max_speed
@@ -45,8 +45,13 @@ class ControlMomentGyroscope:
     def calculate_axis(self, torque: list[float], angular_velocity: list[float]) -> np.array:
         return np.linalg.norm(torque) / self.max_momentum * np.array(angular_velocity)
 
-    def calculate_coordinates(self, torque: list, angular_velocity: float, axis: list) -> np.array:
-        return np.array(self.coordinates) + self.calculate_angular_velocity(torque, axis) * self.calculate_axis(torque, angular_velocity)
+    def calculate_coordinates(self, torque: list, angular_velocity: list[float], axis: list) -> np.array:
+        return self.coordinates + self.calculate_axis(torque, angular_velocity)
 
     def __str__(self):
-        return f"ControlMomentGyroscope(max_momentum={self.max_momentum}, max_speed={self.max_speed}, coordinates={self.coordinates})"
+        return (
+                f"ControlMomentGyroscope("
+                f"max_momentum={self.max_momentum}, "
+                f"max_speed={self.max_speed}, "
+                f"coordinates={self.coordinates})"
+        )
