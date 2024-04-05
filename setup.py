@@ -14,7 +14,7 @@ setup(
         "scipy",
         "matplotlib",
         "behave",
-        "pgAdmin4"
+        "pgAdmin4<=8.2"
     ],
     author='Yvan Cywan',
     description='A non working model of the ISS',
